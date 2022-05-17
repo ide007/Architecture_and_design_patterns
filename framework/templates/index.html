@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Home Page</h1>
+    {% for page in pages %}
+        <h3>{{ page.position }}</h3>
+        <p>First stage: {{ page.first_stage }}</p>
+        <p>Second stage: {{ page.second_stage }}</p>
+    {% endfor %}}
+</body>
+</html>

@@ -1,15 +1,28 @@
-from pprint import pprint
+from framework.request import Request
+from framework.views import View
 
-from request import Request
 
+class Framework:
 
-def app(environ, start_response):
-    # pprint(environ)
-    # request = Request(environ)
-    # print(request.headers)
-    # print(request.body.read())
-    data = b'Hello world from a simple WSGI application!\n'
-    start_response('200 OK', [('Content-Type', 'text/html'),
-                              ("Content-Length", str(len(data)))
-                              ])
-    return iter([data])
+    def __init__(self, urls):
+        self.urls = urls
+
+    def __call__(self, environ, start_response):
+        request = Request(environ)
+        view = self._get_view(request)
+        print(self._get_response(request, view))
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return [b'Hello world from a simple WSGI application.']
+
+    def _get_view(self, request):
+        path = request.path
+        for url in self.urls:
+            if url.url == path:
+                return url.view
+        return None
+
+    def _get_response(self, request: Request, view: View):
+        if hasattr(view, request.method):
+            return getattr(view, request.method)(view, request)
+        else:
+            'Method undefined.'

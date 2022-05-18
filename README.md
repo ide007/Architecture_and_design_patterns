@@ -25,3 +25,6 @@ Architecture and design patterns in Python
 7. Сдать задание в виде ссылки на репозиторий.
 8. В readme указать пример, как запустить фреймворк с помощью uwsgi и/или
    gunicorn.
+
+для запуска на windows: waitress-serve --listen=127.0.0.1:8000 main:app
+для запуска на unix: gunicorn main:app

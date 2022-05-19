@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from typing import Type
 
-from framework.views import View
+from framework.wsgi.views import View
 
 
 @dataclass

@@ -1,19 +1,16 @@
-import os.path
-
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 
 
-def rendering(url: str, folder='templates', **kwargs):
+def rendering(template_name: str, folder='templates', **kwargs):
     """
-    :param url: url
+    :param template_name: имя шаблона
     :param folder: папка с шаблонами, в моем случаи ../templates
     :param kwargs: дополнительные параметры
     :return: рендеринг страницы
     """
-    file_path = os.path.join(folder, url)
-    with open(file_path, encoding='utf-8') as file:
-        template = Template(file.read())
-
+    env = Environment()
+    env.loader = FileSystemLoader(folder)
+    template = env.get_template(template_name)
     return template.render(**kwargs)
 
 
@@ -23,4 +20,3 @@ if __name__ == '__main__':
         'author': 'А.С.Пушкин',
         'genre': 'Поэма'
     })
-    # print(page)

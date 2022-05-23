@@ -52,7 +52,7 @@ class Framework:
         result = {}
         if data:
             params = data.split('&')
-            for i in data:
+            for i in params:
                 key, value = i.split('=')
                 if result.get(key):
                     result[key] = value

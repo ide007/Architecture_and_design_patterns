@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contacts</title>
-</head>
-<body>
-    <h1>Send us a message</h1>
+{% extends 'base.html' %}
+{% block title %}Contacts{% endblock %}
+{% block content %}
+    <h2>Send us a message</h2>
     <form method="post">
         <br>
-        <p><b><h2>Title of message</h2></b></p>
+        <p><b><h3>Title of message</h3></b></p>
         <input type="text" name="title" placeholder="Title"><Br>
         <p><b>Enter your email address</b></p>
         <input type="email" name="email" placeholder="email"><Br>
@@ -17,5 +13,4 @@
         <Br><button type="submit">Send a message</button>
         <button type="reset">Clear</button>
     </form>
-</body>
-</html>
+{% endblock %}

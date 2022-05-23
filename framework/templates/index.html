@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Library</title>
-</head>
-<body>
-<h1>Все книги</h1>
-{% for book in books %}
-    <h3>   {{ book.title }}   </h3>
-    <p>Автор      : {{ book.author }}</p>
-    <p>Жанр книги : {{ book.genre }}</p>
-{% endfor %}
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Library{% endblock %}
+{% block content %}
+    <h2>Все книги</h2>
+    {% for book in books %}
+        <h3>   {{ book.title }}   </h3>
+        <p>Автор      : {{ book.author }}</p>
+        <p>Жанр книги : {{ book.genre }}</p>
+    {% endfor %}
+{% endblock %}

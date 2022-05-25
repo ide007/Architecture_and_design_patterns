@@ -1,3 +1,6 @@
+import urllib.parse
+
+
 class Framework:
 
     def __init__(self, urls: dict, controllers: list):
@@ -44,7 +47,8 @@ class Framework:
     def _parse_wsgi_input(self, data: bytes):
         result = {}
         if data:
-            data_string = data.decode(encoding='utf-8')
+            data_string = data.decode(encoding='utf-8').replace('+', ' ')
+            data_string = urllib.parse.unquote(data_string)
             result = self._parse_input_data(data_string)
         return result
 

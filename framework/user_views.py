@@ -1,25 +1,55 @@
 import os
 import datetime
-from pprint import pprint
 
+from models import TrainingSite
 from wsgi.response import rendering
-from books import books
+from log_module import Logger
+
+site = TrainingSite()
+logger = Logger('main')
 
 
-def home_view(request):
-    return '200 OK', rendering('index.html', books=books)
+def home(request):
+    logger.log('Список курсов')
+    return '200 OK', rendering('index.html', objects_list=site.courses)
 
 
-def poem_view(request):
-    return '200 OK', rendering('book.html', books=books[0])
+def create_course(request):
+    if request['method'] == 'post':
+        data = request['data']
+        print('<==>', data['name'].encode('utf-8').decode('utf-8'))
+        name = data['name'].encode('utf-8').decode('utf-8')
+        category_id = data.get('category_id')
+        print(category_id)
+        category = None
+        if category_id:
+            category = site.find_category_by_id(int(category_id))
+            new_course = site.create_course('он-лайн', name, category)
+            site.courses.append(new_course)
+        return '200 OK', rendering('create_course.html')
+    else:
+        categories = site.categories
+        return '200 OK', rendering('create_course.html', categories=categories)
 
 
-def romance_view(request):
-    return '200 OK', rendering('book.html', books=books[1])
+def create_category(request):
+    if request['method'] == 'post':
+        data = request['data']
+        print('==>', data['name'].encode('utf-8').decode('utf-8'))
+        name = data['name'].encode('utf-8').decode('utf-8')
+        category_id = data.get('category_id')
+        category = None
 
+        if category_id:
+            category = site.find_category_by_id(int(category_id))
 
-def drama_view(request):
-    return '200 OK', rendering('book.html', books=books[2])
+        new_category = site.create_category(name, category)
+        site.categories.append(new_category)
+        return '200 OK', rendering('create_category.html')
+    else:
+        categories = site.categories
+        return '200 OK', rendering('create_category.html',
+                                   categories=categories)
 
 
 def about_view(request):

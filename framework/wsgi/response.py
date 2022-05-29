@@ -12,11 +12,3 @@ def rendering(template_name: str, folder='templates', **kwargs):
     env.loader = FileSystemLoader(folder)
     template = env.get_template(template_name)
     return template.render(**kwargs)
-
-
-if __name__ == '__main__':
-    page = rendering('index.html', books={
-        'title': 'Руслан и Людмила',
-        'author': 'А.С.Пушкин',
-        'genre': 'Поэма'
-    })

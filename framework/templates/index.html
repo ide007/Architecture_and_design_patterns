@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}Library{% endblock %}
+{% block title %}Обучающий сайт{% endblock %}
 {% block content %}
-    <h2>Все книги</h2>
-    {% for book in books %}
-        <h3>   {{ book.title }}   </h3>
-        <p>Автор      : {{ book.author }}</p>
-        <p>Жанр книги : {{ book.genre }}</p>
+    <h2>Список курсов</h2>
+    {% for course in courses %}
+        <li>
+            <h3>Категория       : {{ course.category }}</h3>
+            <p> {{ course.name }} <span><a href="/copy_course/?name={{course.name}}">Скопировать</a></span></p>
+            <p>Формат обучения  : {{ course.type_ }}</p>
+        </li>
     {% endfor %}
 {% endblock %}

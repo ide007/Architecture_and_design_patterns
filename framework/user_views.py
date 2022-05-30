@@ -18,13 +18,14 @@ def create_course(request):
     if request['method'] == 'post':
         data = request['data']
         print('<==>', data['name'].encode('utf-8').decode('utf-8'))
-        name = data['name'].encode('utf-8').decode('utf-8')
+        course_name = data['name'].encode('utf-8').decode('utf-8')
         category_id = data.get('category_id')
-        print(category_id)
+        print('category_id: ', category_id)
         category = None
         if category_id:
             category = site.find_category_by_id(int(category_id))
-            new_course = site.create_course('он-лайн', name, category)
+            new_course = site.create_course(type_='он-лайн', name=course_name,
+                                            category=category)
             site.courses.append(new_course)
         return '200 OK', rendering('create_course.html')
     else:
@@ -36,14 +37,14 @@ def create_category(request):
     if request['method'] == 'post':
         data = request['data']
         print('==>', data['name'].encode('utf-8').decode('utf-8'))
-        name = data['name'].encode('utf-8').decode('utf-8')
+        category_name = data['name'].encode('utf-8').decode('utf-8')
         category_id = data.get('category_id')
         category = None
 
         if category_id:
             category = site.find_category_by_id(int(category_id))
 
-        new_category = site.create_category(name, category)
+        new_category = site.create_category(category_name, category)
         site.categories.append(new_category)
         return '200 OK', rendering('create_category.html')
     else:

@@ -5,8 +5,8 @@
     {% for item in objects_list%}
         <li>
             <h3>Категория : {{ item.name }}</h3>
-            <p> {{ item.name }} <span>Количество курсов: {{item.course_count() }}"</span></p>
-            <p>Формат обучения : {{ course.type_ }}</p>
+            <p> {{ item.name }} <span>Количество курсов: {{ item.course_count() }}"</span></p>
+            <p>Формат обучения : {{ item.type_ }}</p>
         </li>
     {% endfor %}
 {% endblock %}

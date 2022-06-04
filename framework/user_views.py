@@ -3,7 +3,7 @@ import datetime
 
 from models import TrainingSite
 from wsgi.response import rendering
-from log_module import Logger
+from log_module import Logger, debug
 
 site = TrainingSite()
 logger = Logger('main')
@@ -14,6 +14,7 @@ def home(request):
     return '200 OK', rendering('index.html', objects_list=site.courses)
 
 
+@debug
 def create_course(request):
     if request['method'] == 'post':
         data = request['data']
@@ -33,6 +34,7 @@ def create_course(request):
         return '200 OK', rendering('create_course.html', categories=categories)
 
 
+@debug
 def create_category(request):
     if request['method'] == 'post':
         data = request['data']

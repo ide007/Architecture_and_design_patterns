@@ -1,4 +1,8 @@
 class SingletonNamed(type):
+    """
+    Класс для создания единственного объекта класса, с определенным именем.
+    В данном проекте, используется для логирования.
+    """
     # синглтон именованный
     def __init__(cls, name, bases, attrs, **kwargs):
         super().__init__(name, bases, attrs)

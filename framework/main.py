@@ -1,5 +1,5 @@
 from models import TrainingSite
-from wsgi.wsgi import Framework
+from wsgi.wsgi import Framework, DebugApplication, FakeApplication
 from wsgi.response import rendering
 from user_urls import user_url as urls
 
@@ -10,7 +10,10 @@ def controller(request):
 
 front_controller = [controller]
 
-app = Framework(urls, front_controller)
+# app = Framework(urls, front_controller)
+app = DebugApplication(urls, front_controller)
+# app = FakeApplication(urls, front_controller)
+
 site = TrainingSite()
 
 

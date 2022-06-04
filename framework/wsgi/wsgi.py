@@ -92,3 +92,26 @@ class Framework:
                     result[key] = value
 
         return result
+
+
+class DebugApplication(Framework):
+
+    def __init__(self, url, controller):
+        self.application = Framework(url, controller)
+        super().__init__(url, controller)
+
+    def __call__(self, environ, start_response):
+        print('Debug mode ')
+        # print(environ)
+        return self.application(environ, start_response)
+
+
+class FakeApplication(Framework):
+
+    def __init__(self, url, controller):
+        self.application = Framework(url, controller)
+        super().__init__(url, controller)
+
+    def __call__(self, environ, start_response):
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return [b'Hello from Fake']

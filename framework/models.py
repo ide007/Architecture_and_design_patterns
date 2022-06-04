@@ -29,7 +29,7 @@ class UserFactory:
 
     @classmethod
     def create(cls, type_):
-        return cls.types[type_]()
+        return cls.types[type_]() or {}
 
 
 class Category:
@@ -108,6 +108,7 @@ class TrainingSite:
 
     def get_course(self, name) -> Course:
         for item in self.courses:
+            print('курс : ', item)
             if item.name == name:
                 return item
         return None

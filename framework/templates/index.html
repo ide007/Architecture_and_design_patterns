@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Обучающий сайт{% endblock %}
+{% block content %}
+    <h2>Список курсов</h2>
+    {% for item in courses %}
+        <li>
+            <h3>Категория       : {{ item.category }}</h3>
+            <p> {{ item.name }} <span><a href="/copy_course/?name={{item.name}}">Скопировать</a></span></p>
+            <p>Формат обучения  : {{ item.type_ }}</p>
+        </li>
+    {% endfor %}
+{% endblock %}

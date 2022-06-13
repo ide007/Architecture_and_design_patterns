@@ -21,6 +21,18 @@ def debug(func):
         return result
     return wrap
 
-# s1, s2, s3 = Logger('log_1'), Logger('log_2'), Logger('log_1')
-# print(s1, '\n', s2, '\n', s3, sep='')
-# print(s1 is s3)
+
+class ConsoleWriter:
+
+    def write(self, text):
+        print(text)
+
+
+class FileWriter:
+
+    def __init__(self, file_name):
+        self.file_name = file_name
+
+    def write(self, text):
+        with open(self.file_name, 'a', encoding='utf-8') as f:
+            f.write(f'{text}\n')

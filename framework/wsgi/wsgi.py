@@ -102,7 +102,6 @@ class DebugApplication(Framework):
 
     def __call__(self, environ, start_response):
         print('Debug mode ')
-        # print(environ)
         return self.application(environ, start_response)
 
 
@@ -113,5 +112,6 @@ class FakeApplication(Framework):
         super().__init__(url, controller)
 
     def __call__(self, environ, start_response):
+        print('FakeApplication mode ')
         start_response('200 OK', [('Content-Type', 'text/html')])
         return [b'Hello from Fake']

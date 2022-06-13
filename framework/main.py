@@ -1,7 +1,9 @@
 from models import TrainingSite
 from wsgi.wsgi import Framework, DebugApplication, FakeApplication
-from wsgi.response import rendering
+from wsgi.response import *
 from user_urls import user_url as urls
+
+site = TrainingSite()
 
 
 def controller(request):
@@ -10,11 +12,9 @@ def controller(request):
 
 front_controller = [controller]
 
-# app = Framework(urls, front_controller)
-app = DebugApplication(urls, front_controller)
+app = Framework(urls, front_controller)
+# app = DebugApplication(urls, front_controller)
 # app = FakeApplication(urls, front_controller)
-
-site = TrainingSite()
 
 
 @app.add_route('/copy_course/')

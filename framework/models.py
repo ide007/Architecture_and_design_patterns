@@ -1,5 +1,6 @@
 import jsonpickle as jsonpickle
 
+from wsgi.unit_of_work import DomainObject
 from patterns.prototype import PrototypeMixin
 from patterns.observer import Observer, Subject
 
@@ -13,7 +14,7 @@ class Teacher(User):
     pass
 
 
-class Student(User):
+class Student(User, DomainObject):
 
     def __init__(self, name):
         self.courses = []

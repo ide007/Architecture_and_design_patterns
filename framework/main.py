@@ -3,6 +3,7 @@ from wsgi.wsgi import Framework, DebugApplication, FakeApplication
 from wsgi.response import *
 from user_urls import user_url as urls
 
+
 site = TrainingSite()
 
 

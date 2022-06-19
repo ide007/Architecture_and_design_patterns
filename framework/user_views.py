@@ -2,6 +2,8 @@ import os
 import datetime
 from urllib.parse import unquote
 
+from mapper import MapperRegistry
+from wsgi.unit_of_work import UnitOfWork
 from wsgi.CBV import CreateView, ListView, TemplateView
 from models import TrainingSite, SmsNotifier, EmailNotifier
 from wsgi.response import rendering
@@ -11,6 +13,8 @@ site = TrainingSite()
 logger = Logger('main')
 sms_notifier = SmsNotifier()
 email_notifier = EmailNotifier()
+UnitOfWork.new_current()
+UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 
 def course_list(request):
@@ -80,7 +84,8 @@ class StudentCreateView(CreateView):
         name = unquote(data['name'])
         new_student = site.create_user('student', name)
         site.students.append(new_student)
-
+        new_student.mark_new()
+        UnitOfWork.get_current().commit()
 
 class StudentListView(ListView):
 
